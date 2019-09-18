@@ -1,4 +1,7 @@
-// Imports Neccesary Libraries
+// This Project Lets Users Play Guessing Game, randomly choosing a number between 1 and 100, and telling them if their guesses are higher or lower than the actual number,
+// if they guess correct, it will ask them if they want to play again and start the game again if they wish to do so. 
+// Ethan Wang
+// 9/10/19
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
