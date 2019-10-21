@@ -47,7 +47,7 @@ int main() {
   cout << "Welcome to Student List, ADD, PRINT, DELETE, QUIT\n";
   cin.getline (input, 10); 
   if (strcmp(input, "QUIT") == 0) {
-    onQuit = true;
+    exit(0);
   }
   else if (strcmp(input, "ADD") == 0) {
     StudentList.push_back(addName()); 
@@ -58,8 +58,11 @@ int main() {
   }
   else if (strcmp(input, "DELETE") == 0) {
     deleteName(&StudentList);
+    cin.clear();
+    cin.ignore(999, '\n');
   }
-  else {
+  else 
+   {
     cout << "\nPlease Enter a Valid Command, ADD, DELETE, PRINT, QUIT";
   }
 
@@ -68,6 +71,10 @@ int main() {
 }
 
 void printNames(vector<Student*> StudentList) {
+  if (StudentList.empty() == true) {
+    cout << "Student List is Empty, Nothing to Print!";
+  }
+  else {
   for (vector<Student*>:: iterator printAll = StudentList.begin(); printAll != StudentList.end(); ++printAll) {
     cout << (*printAll) -> firstName << " ";
     cout << (*printAll) -> lastName << ", ";
@@ -75,19 +82,26 @@ void printNames(vector<Student*> StudentList) {
     cout << setprecision(3) << (*printAll) -> GPA << "\n"; 
    }
 }
-
+}
 void deleteName(vector<Student*>* StudentList) {
   int StudentIDinput; 
-  cout << "Which Student do you want to delete?";
+  cout << "Which Student do you want to delete? \n";
   cin >> StudentIDinput;
-  for (vector<Student*>:: iterator find = StudentList -> begin(); find != StudentList -> end(); ++find) {
-    if ((*find) -> ID == StudentIDinput) {
-      StudentList -> erase(find);
-      cout << "Student Deleted"; 
+  if (StudentList -> empty() == true) {
+      cout << "Student List is Empty, Nothing to Delete! \n";
+      return;
+  }
+  else {
+    for (vector<Student*>:: iterator find = StudentList -> begin(); find != StudentList -> end(); find++) {
+      if ((*find) -> ID == StudentIDinput) {
+	StudentList -> erase(find);
+	delete *find;
+	cout << "Student Deleted \n";
+	return;
     }
-    else {
-      cout << "No Student on This List with the Student ID Given."; 
+      else {
+	cout << "No Student on This List with the Student ID Given. \n"; 
     }
   }
-  
+  }
 } 
