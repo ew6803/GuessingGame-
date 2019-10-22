@@ -108,9 +108,10 @@ void deleteName(vector<Student*>* StudentList) {
 	  //Runs through vector ot students and searches for ID, if match is found, student data and student in vector is deleted. 
     for (vector<Student*>:: iterator find = StudentList -> begin(); find != StudentList -> end(); find++) {
       if ((*find) -> ID == StudentIDinput) {
+	delete *find;
 	StudentList -> erase(find);
 	cout << "Student Deleted \n";
-	delete *find;
+	
 	return;
     }
       else {
